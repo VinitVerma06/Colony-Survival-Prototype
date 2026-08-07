@@ -1,14 +1,17 @@
 using Newtonsoft.Json;
 
-public static class ConfigLoader {
+namespace Simulation.Core {
 
-    public static PopulationConfig LoadPopulationConfig(string json) {
+    public static class ConfigLoader {
+
+        public static PopulationConfig LoadPopulationConfig(string json) {
         
-        return JsonConvert.DeserializeObject<PopulationConfig>(json);
-    }
+            return JsonConvert.DeserializeObject<PopulationConfig>(json);
+        }
 
-    public static ConsumptionConfig LoadConsumptionConfig(string json) {
+        public static ConsumptionConfig LoadConsumptionConfig(string json) {
 
-        return JsonConvert.DeserializeObject<ConsumptionConfig>(json);
+            return JsonConvert.DeserializeObject<ConsumptionConfig>(json);
+        }
     }
 }

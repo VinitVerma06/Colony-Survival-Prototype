@@ -1,7 +1,10 @@
+namespace Simulation.Core {
 
-public class ConsumptionConfig {
+    public class ConsumptionConfig {
 
-    public float foodPerVillagerPerDay;     // Food consumed by a single villager in a day
-    public float waterPerVillagerPerDay;    // Water consumed by a single villager in a day
+        public float FoodPerVillagerPerDay;     // Food consumed by a single villager in a day
+        public float WaterPerVillagerPerDay;    // Water consumed by a single villager in a day
+
+    }
 
 }
