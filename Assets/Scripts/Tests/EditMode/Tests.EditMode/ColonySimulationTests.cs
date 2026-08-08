@@ -2,13 +2,32 @@ using NUnit.Framework;
 using Simulation.Core;
 
 public class ColonySimulationTests {
+
+    private ColonySimulation simulation;
+
+    [SetUp] 
+    public void Setup() {
+
+        // Assign values
+        PopulationConfig populationConfig = new PopulationConfig { 
+            VillagerCount = 10, 
+            StartingFood = 100, 
+            StartingWater = 80 
+        };
+        
+        ConsumptionConfig consumptionConfig = new ConsumptionConfig { 
+            FoodPerVillagerPerDay = 1f, 
+            WaterPerVillagerPerDay = 0.8f 
+        };
+        
+        simulation = new ColonySimulation(
+            populationConfig, 
+            consumptionConfig
+        );
+    }
+
     [Test]
     public void AdvanceDay_ReduceResourcesByCorrectAmount() {
-        
-        // Assign values
-        var populationConfig = new PopulationConfig { VillagerCount = 10, StartingFood = 100, StartingWater = 80 };
-        var consumptionConfig = new ConsumptionConfig { FoodPerVillagerPerDay = 1f, WaterPerVillagerPerDay = 0.8f };
-        var simulation = new ColonySimulation(populationConfig, consumptionConfig);
         
         // Advance to day 3
         simulation.AdvanceDay();
@@ -22,11 +41,6 @@ public class ColonySimulationTests {
 
     [Test]
     public void AdvanceDay_IncreasesCurrentDayByOne() {
-        
-        // Assign values
-        var populationConfig = new PopulationConfig { VillagerCount = 10, StartingFood = 100, StartingWater = 80 };
-        var consumptionConfig = new ConsumptionConfig { FoodPerVillagerPerDay = 1f, WaterPerVillagerPerDay = 0.8f };
-        var simulation = new ColonySimulation(populationConfig, consumptionConfig);
 
         // Advance the day
         simulation.AdvanceDay();
