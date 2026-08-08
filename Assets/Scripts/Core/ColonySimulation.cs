@@ -21,7 +21,7 @@ namespace Simulation.Core {
 
             // Reads the values from consumption config
             FoodPerVillagerPerDay = consumption.FoodPerVillagerPerDay;
-            WaterPerVillagerPerDay = consumption.FoodPerVillagerPerDay;
+            WaterPerVillagerPerDay = consumption.WaterPerVillagerPerDay;
 
             CurrentDay = 0;
         }
