@@ -1,9 +1,13 @@
+using System;
 using System.IO;
 using UnityEngine;
 using Simulation.Core;
 using System.Collections;
 
 public class SimulationRunner : MonoBehaviour {
+
+    public static Action<ColonySimulation> OnDayAdvanced;
+    public static Action OnColonyStarving;
 
     private ColonySimulation colonySimulation;
 
@@ -34,11 +38,12 @@ public class SimulationRunner : MonoBehaviour {
             yield return new WaitForSeconds(1f);
 
             colonySimulation.AdvanceDay();
-
-            Debug.Log("Day " + colonySimulation.CurrentDay);
+            OnDayAdvanced?.Invoke(colonySimulation);
+            
 
             if (colonySimulation.IsStarving) {
-                Debug.Log("Colony is starving!");
+                OnColonyStarving?.Invoke();
+                break;
             }
         }
     }
