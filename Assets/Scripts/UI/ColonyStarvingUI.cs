@@ -3,6 +3,7 @@ using UnityEngine;
 public class ColonyStarvingUI : MonoBehaviour {
 
     private void Start() {
+        Hide();
         SimulationRunner.OnColonyStarving += SimulationRunner_OnColonyStarving;
     }
 
