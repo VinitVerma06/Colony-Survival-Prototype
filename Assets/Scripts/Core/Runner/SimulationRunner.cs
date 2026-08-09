@@ -4,29 +4,42 @@ using Simulation.Core;
 using System.Collections;
 
 public class SimulationRunner : MonoBehaviour {
-    
-    private void Start() {
-        string populationPath = Path.Combine(Application.streamingAssetsPath, "population.json");
-        string populationJson = File.ReadAllText(populationPath);
 
+    private ColonySimulation colonySimulation;
+
+    private void Start() {
+        // Build the path to configuration file 
+        string populationPath = Path.Combine(Application.streamingAssetsPath, "population.json");
         string consumptionPath = Path.Combine(Application.streamingAssetsPath, "consumption.json");
+
+        // Read the json data from the configuration file
+        string populationJson = File.ReadAllText(populationPath);
         string consumptionJson = File.ReadAllText(consumptionPath);
 
+        // Convert the json string into configuration objects
         PopulationConfig populationConfig = ConfigLoader.LoadPopulationConfig(populationJson);
         ConsumptionConfig consumptionConfig = ConfigLoader.LoadConsumptionConfig(consumptionJson);
 
-        // Initialize the ColonySimulation
-        ColonySimulation colonySimulation = new ColonySimulation(populationConfig, consumptionConfig);
+        // Initialize the ColonySimulation 
+        colonySimulation = new ColonySimulation(populationConfig, consumptionConfig);
 
-        StartCoroutine(RunColonySimulation(colonySimulation));
+        // Start the simulation
+        StartCoroutine(RunColonySimulation());
     }
 
-    private IEnumerator RunColonySimulation(ColonySimulation colonySimulation) {
-        
+    private IEnumerator RunColonySimulation() {
+
         while (true) {
+
             yield return new WaitForSeconds(1f);
+
             colonySimulation.AdvanceDay();
-            Debug.Log(colonySimulation.CurrentDay);
+
+            Debug.Log("Day " + colonySimulation.CurrentDay);
+
+            if (colonySimulation.IsStarving) {
+                Debug.Log("Colony is starving!");
+            }
         }
     }
 }
