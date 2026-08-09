@@ -16,7 +16,7 @@ public class ColonyUI : MonoBehaviour {
     private string foodDaysRemainingString = "Days Remaining for food : ";
     private string waterDaysRemainingString = "Days Remaining for water : ";
 
-    private void OnEnable() {
+    private void Start() {
         SimulationRunner.OnDayAdvanced += SimulationRunner_OnDayAdvanced;
     }
 
