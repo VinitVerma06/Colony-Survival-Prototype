@@ -33,6 +33,10 @@ public class SimulationRunner : MonoBehaviour {
 
     private IEnumerator RunColonySimulation() {
 
+        // Wait one frame, so every subscriber knows 0 day is initialize
+        yield return null;
+        OnDayAdvanced?.Invoke(colonySimulation);
+
         while (true) {
 
             // Wait for a second before advancing to the next day

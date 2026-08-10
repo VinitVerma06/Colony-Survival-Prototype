@@ -15,7 +15,10 @@ A colony simulation prototype: simulates a colony's food and water reserves depl
 3. You should see `ColonySimulationTests` listed, containing the following tests:
    - `AdvanceDay_ReduceResourcesByCorrectAmount`
    - `AdvanceDay_IncreasesCurrentDayByOne`
-   
+   - `AdvanceDay_DoesNotAllowFoodBelowZero`
+   - `AdvanceDay_DoesNotAllowWaterBelowZero`
+   - `IsStarving_ReturnsFalseWhenResourcesAvailable`
+   - `IsStarving_ReturnsTrueWhenFoodReachesZero`
 4. Click **Run All** to execute all tests, or select an individual test and click **Run Selected**.
 5. Passed tests show a green checkmark; failed tests show a red icon with details on what didn't match.
 
