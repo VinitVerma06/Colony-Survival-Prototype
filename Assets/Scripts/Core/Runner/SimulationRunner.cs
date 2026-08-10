@@ -24,10 +24,10 @@ public class SimulationRunner : MonoBehaviour {
         PopulationConfig populationConfig = ConfigLoader.LoadPopulationConfig(populationJson);
         ConsumptionConfig consumptionConfig = ConfigLoader.LoadConsumptionConfig(consumptionJson);
 
-        // Initialize the ColonySimulation 
+        // Create the ColonySimulation using the loaded data 
         colonySimulation = new ColonySimulation(populationConfig, consumptionConfig);
 
-        // Start the simulation
+        // Start the coroutine for advancing the simulation
         StartCoroutine(RunColonySimulation());
     }
 
@@ -35,15 +35,21 @@ public class SimulationRunner : MonoBehaviour {
 
         while (true) {
 
+            // Wait for a second before advancing to the next day
             yield return new WaitForSeconds(1f);
 
+            // Advances simulation by one day
             colonySimulation.AdvanceDay();
-            OnDayAdvanced?.Invoke(colonySimulation);
-            
 
+            // Notify the subscribers that a new day has been completed
+            OnDayAdvanced?.Invoke(colonySimulation);
+
+            // Check whether the colony has run out of any of the resources
             if (colonySimulation.IsStarving) {
+
+                // Notify subscribers that the colony has entered starvation state
                 OnColonyStarving?.Invoke();
-                break;
+                break;      // Stops the simulation
             }
         }
     }

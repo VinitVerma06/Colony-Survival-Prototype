@@ -10,6 +10,7 @@ public class ColonyUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI foodDaysRemainingText;
     [SerializeField] private TextMeshProUGUI waterDaysRemainingText;
 
+    // Prefix text displayed before each simulation value
     private string dayCounterString = "Current Day : ";
     private string foodReserveString = "Food Reserves : ";
     private string waterReserveString = "Water Reserves : ";
@@ -21,11 +22,14 @@ public class ColonyUI : MonoBehaviour {
     }
 
     private void SimulationRunner_OnDayAdvanced(ColonySimulation simulation) {
+        
+        // Updates all UI elements using the latest simulation data
         UpdateVisual(simulation);
     }
 
     private void UpdateVisual(ColonySimulation simulation) {
-        
+
+        // Update all the texts
         dayCounterText.text = dayCounterString + simulation.CurrentDay;
         
         foodReserveText.text = foodReserveString + simulation.FoodReserve;
