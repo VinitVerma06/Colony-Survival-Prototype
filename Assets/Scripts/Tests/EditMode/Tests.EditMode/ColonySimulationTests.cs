@@ -94,4 +94,15 @@ public class ColonySimulationTests {
         // The colony should be considered starving when food reaches zero
         Assert.IsTrue(simulation.IsStarving);
     }
+
+    [Test]
+    public void IsStarving_ReturnsTrueWhenOnlyOneResourceDepletes() {
+        var population = new PopulationConfig { VillagerCount = 10, StartingFood = 10, StartingWater = 1000 };
+        var consumption = new ConsumptionConfig { FoodPerVillagerPerDay = 1f, WaterPerVillagerPerDay = 0.1f };
+        var testSim = new ColonySimulation(population, consumption);
+
+        testSim.AdvanceDay(); // food: 10 - 10 = 0, water: 1000 - 1 = 999, plenty left
+
+        Assert.IsTrue(testSim.IsStarving);
+    }
 }
